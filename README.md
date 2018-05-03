@@ -9,7 +9,17 @@ There are already plenty of RNN-based text generators out there, but none that u
 The repository includes a bunch of books by Jules Verne. Training a model on those yields ouput like:
 
 
-TODO
+> In a few moments the engineer recognised the dense smoke hidden on the ground, the sharply left with crimson, and the breeze stood behind before numerous pieces of ice so terribly defined a white appearance, which for through the shades in the night the pieces were escaping from this vapory race afforded many <unk> the articles of many ornaments. at the end of an operation to contain a single <unk> belonging to new royal, succeeded on beer and <unk> into idleness; besides, there were strangers and farmers. These indigenous people must be counted by Collinson and <unk> - the most suitable for many of the various inhabitants of the island, when in the first place, representatives of the Gallian night - Dacosta and Day whose appetite were far less difficult to please? 
+>
+> "If you do not make, "answered Harry, "can you afford any resistance to you?"
+>
+> He ran back to the trees and inundated the snow. Half-a-dozen cod sounds that was found, however, of harsh stature, each of which was most frequently appreciated to his lofty <unk>. 
+>
+> Kalumah. 
+>
+> "Either i was at my disposal," said I to lord Edward van Tricasse: 
+>
+> "Same attraction, Simon," answered Pencroft. "Who knows with those who trust to a very common nature, whether it was the basis of all these misfortunes?"
 
 
 ## Installing
