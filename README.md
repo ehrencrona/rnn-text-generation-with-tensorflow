@@ -6,7 +6,7 @@ and to use it to generate new, similar-sounding text.
 
 There are already plenty of RNN-based text generators out there, but none that use the Tensorflow high-level Estimator API.
 
-The repository includes a bunch of books by Jules Verne. Training a model on those yields ouput like:
+The repository includes a bunch of books by Jules Verne. Training a model on those yields output like:
 
 
 > In a few moments the engineer recognised the dense smoke hidden on the ground, the sharply left with crimson, and the breeze stood behind before numerous pieces of ice so terribly defined a white appearance, which for through the shades in the night the pieces were escaping from this vapory race afforded many [unknown] the articles of many ornaments. at the end of an operation to contain a single [unknown] belonging to new royal, succeeded on beer and [unknown] into idleness; besides, there were strangers and farmers. These indigenous people must be counted by Collinson and [unknown] - the most suitable for many of the various inhabitants of the island, when in the first place, representatives of the Gallian night - Dacosta and Day whose appetite were far less difficult to please? 
@@ -27,7 +27,7 @@ The repository includes a bunch of books by Jules Verne. Training a model on tho
 Run
 
 ```
-  python3 setup.py
+  python3 setup.py develop
 ```
 
 Note that the code is intended to be used with Python 3.x.
@@ -39,8 +39,8 @@ To train the model locally, run something like:
 ```
 python -m trainer.task \
   --data_dir training-data/jules \
-  --job-dir job/%JOB% \
-  --summary_dir tensorboard-data/%JOB% \
+  --job-dir jobs/%JOB% \
+  --summary_dir summaries/%JOB% \
   --data_prefix jules \
   --layers 2 \
   --lstm_state_size 50 \
@@ -88,11 +88,11 @@ gcloud ml-engine jobs submit training [A_UNIQUE_ID] \
   --package-path trainer \
   --module-name trainer.task \
   --staging-bucket gs://[STAGING_BUCKET] \
-  --job-dir gs://[DATA_BUCKET]/job/%JOB% \
+  --job-dir gs://[DATA_BUCKET]/jobs/%JOB% \
   --runtime-version 1.7 \
   --config config.yaml \
   -- \
-  --summary_dir gs://[DATA_BUCKET]/tensorboard-data/%JOB% \
+  --summary_dir gs://[DATA_BUCKET]/summaries/%JOB% \
   --data_dir gs://[DATA_BUCKET]/training-data \
   --data_prefix jules \
   --epochs=20 \
@@ -110,11 +110,14 @@ So to generate text using the model trained with the example command above, the 
 
 ```
 python -m trainer.babble-task \
-  --job-dir job/%JOB% \
+  --job-dir jobs/%JOB% \
+  --data_dir training-data \
   --data_prefix jules \
   --layers 2 \
   --lstm_state_size 50 
 ```
+
+(this assumes the training data is in a subdirectory of the current directory called `training-data`)
 
 ## Hyperparameters
 

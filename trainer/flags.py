@@ -13,9 +13,9 @@ def define_flags():
   flags.DEFINE_string('data_prefix', 'text',
                       'File name prefix of the training and validation data (suffix is ".train.txt" and ".valid.txt").')
   # tensorflow expects "job-dir", not "job_dir"
-  flags.DEFINE_string('job-dir', path.join('job', '%JOB%'),
+  flags.DEFINE_string('job-dir', path.join('jobs', '%JOB%'),
                       'Where the finished model is stored.')
-  flags.DEFINE_string('summary_dir', path.join('summary', '%JOB%'),
+  flags.DEFINE_string('summary_dir', path.join('summaries', '%JOB%'),
                       'Where the summary data for TensorFlow is stored.')
   flags.DEFINE_string('data_dir', 'data',
                       'Path to the training and validation data.')
