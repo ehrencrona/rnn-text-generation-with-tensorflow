@@ -9,15 +9,15 @@ There are already plenty of RNN-based text generators out there, but none that u
 The repository includes a bunch of books by Jules Verne. Training a model on those yields ouput like:
 
 
-> In a few moments the engineer recognised the dense smoke hidden on the ground, the sharply left with crimson, and the breeze stood behind before numerous pieces of ice so terribly defined a white appearance, which for through the shades in the night the pieces were escaping from this vapory race afforded many <unk> the articles of many ornaments. at the end of an operation to contain a single <unk> belonging to new royal, succeeded on beer and <unk> into idleness; besides, there were strangers and farmers. These indigenous people must be counted by Collinson and <unk> - the most suitable for many of the various inhabitants of the island, when in the first place, representatives of the Gallian night - Dacosta and Day whose appetite were far less difficult to please? 
+> In a few moments the engineer recognised the dense smoke hidden on the ground, the sharply left with crimson, and the breeze stood behind before numerous pieces of ice so terribly defined a white appearance, which for through the shades in the night the pieces were escaping from this vapory race afforded many [unknown] the articles of many ornaments. at the end of an operation to contain a single [unknown] belonging to new royal, succeeded on beer and [unknown] into idleness; besides, there were strangers and farmers. These indigenous people must be counted by Collinson and [unknown] - the most suitable for many of the various inhabitants of the island, when in the first place, representatives of the Gallian night - Dacosta and Day whose appetite were far less difficult to please? 
 >
-> "If you do not make, "answered Harry, "can you afford any resistance to you?"
+> "If you do not make," answered Harry, "can you afford any resistance to you?"
 >
-> He ran back to the trees and inundated the snow. Half-a-dozen cod sounds that was found, however, of harsh stature, each of which was most frequently appreciated to his lofty <unk>. 
+> He ran back to the trees and inundated the snow. Half-a-dozen cod sounds that was found, however, of harsh stature, each of which was most frequently appreciated to his lofty [unknown]. 
 >
 > Kalumah. 
 >
-> "Either i was at my disposal," said I to lord Edward van Tricasse: 
+> "Either I was at my disposal," said I to Lord Edward van Tricasse: 
 >
 > "Same attraction, Simon," answered Pencroft. "Who knows with those who trust to a very common nature, whether it was the basis of all these misfortunes?"
 
@@ -32,7 +32,7 @@ Run
 
 Note that the code is intended to be used with Python 3.x.
 
-## Running locally
+## Training locally
 
 To train the model locally, run something like:
 
@@ -55,7 +55,9 @@ This makes it easier to keep track of the hyperparameters of each model when you
 
 Hyperparameters that don't affect the checkpoint format are not part of the job name, so if you e.g. change the learning rate or the number of unrolled steps you can continuing training the same model.
 
-## Running on Google Cloud Machine Learning Engine
+The script will generate some text regularly during training (everytime a checkpoint is saved) to give you some idea of the progress beyond the loss.
+
+## Training on Google Cloud Machine Learning Engine
 
 To train the model on Google Cloud, first following the instructions in the [Tensorflow Getting Started](https://cloud.google.com/ml-engine/docs/tensorflow/getting-started-training-prediction#setup) and then run something like:
 
@@ -100,12 +102,26 @@ gcloud ml-engine jobs submit training [A_UNIQUE_ID] \
   --layer_norm=True 
 ```
 
+## Generating text
+
+To generate text, just replace `task` with `babble-task`. The hyperparameters determine which model (directory) is used, so they also need to be specified.
+
+So to generate text using the model trained with the example command above, the following command could be used. Unnecessary parameters have been dropped, but the exact same parameters as above could also be used.
+
+```
+python -m trainer.babble-task \
+  --job-dir job/%JOB% \
+  --data_prefix jules \
+  --layers 2 \
+  --lstm_state_size 50 
+```
+
 ## Hyperparameters
 
 There's plenty of hyperparameters that can be specified as command-line parameter. 
 For a complete list see [flags.py](/trainer/flags.py).
 
-Notably, can also specify whether you want to train a character-level model or a word-based model using the parameter `--language_model=word/char`
+Notably, you can specify whether you want to train a character-level model or a word-based model using the parameter `--language_model=word/char`
 
 ## Feedback
 
